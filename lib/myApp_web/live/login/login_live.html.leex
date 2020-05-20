@@ -1,0 +1,31 @@
+<div class="formulario-login">
+
+<div class="card border-dark mb-3 mt-3" style="width: 50rem;">
+  <div class="card-body">
+    <h3 style="text-align: center;" class="card-title">INICIAR SESIÓN</h3>
+    <div class="card-text">
+      <%= f = form_for @changeset, "#", [phx_change: :validate, phx_submit: :save] %>
+        <%= if @changeset.action do %>
+          <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Oops!</strong> Por favor corrige los errores.
+          </div>
+        <% end %>
+
+        <%= label f, :email %>
+        <%= email_input f, :email %>
+        <%= error_tag f, :email %>
+
+        <%= label f, :password %>
+        <%= password_input f, :password, value: input_value(f, :password) %>
+        <%= error_tag f, :password %>
+
+        <div style="justify-content: center; display: flex;">
+          <%= submit "Login", class: "btn btn-primary", style: "width: 100px" %>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div>

@@ -1,0 +1,32 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <% if @current_user !== nil do %>
+            <li class="nav-item active">
+              <a class="nav-link" href="/form">Form <span class="sr-only">(current)</span></a>
+            </li>
+          <% end %>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <% if @current_user !== nil  do %>
+            <span><%= @current_user.email %></span>
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">
+              <%= link "Logout", to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
+            </button>
+          <% end %>
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">
+              <%= link "Registrarse", to: Routes.pow_registration_path(@conn, :new), class: "btn btn-info" %>
+            </button>
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">
+              <%= link "Login", to: Routes.pow_session_path(@conn, :new), class: "btn btn-info" %>
+            </button>
+        </form>
+      </div>
+    </nav>
+</header>
+
+<%= @inner_content %>

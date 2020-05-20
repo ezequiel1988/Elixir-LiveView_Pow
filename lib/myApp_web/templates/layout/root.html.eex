@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <%= csrf_meta_tag() %>
+    <%= live_title_tag assigns[:page_title] || "MyApp", suffix: " · Phoenix Framework" %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/flatly/bootstrap.min.css">
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+  </head>
+  <body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+          <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <%= if Pow.Plug.current_user(@conn)  do %>
+                <li class="nav-item active">
+                  <a class="nav-link" href="/form">Form <span class="sr-only">(current)</span></a>
+                </li>
+              <% end %>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <%= if Pow.Plug.current_user(@conn)  do %>
+                <span style="color: white"><%= @current_user.email %></span>
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">
+                  <%= link "Logout", to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
+                </button>
+              <% else %>
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">
+                  <%= link "Registrarse", to: Routes.pow_registration_path(@conn, :new), class: "btn btn-info" %>
+                </button>
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">
+                  <%= link "Login", to: Routes.pow_session_path(@conn, :new), class: "btn btn-info" %>
+                </button>
+              <% end %>
+            </form>
+          </div>
+        </nav>
+    </header>
+    <%= @inner_content %>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

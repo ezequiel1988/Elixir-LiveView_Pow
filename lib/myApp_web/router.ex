@@ -41,7 +41,10 @@ defmodule MyAppWeb.Router do
 
   scope "/", MyAppWeb do
       pipe_through [:browser, :protected]
-      live "/form", FormLive
+      live "/products", ProductsLive
+      live "/products/new", AddProductsLive
+      live "/products/edit", UpdateProductsLive
+
       # Add your protected routes here
   end
   # Other scopes may use custom stacks.

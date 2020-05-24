@@ -3,11 +3,16 @@ defmodule MyApp.Users.User do
   use Pow.Ecto.Schema
   use Pow.Extension.Ecto.Schema,
     extensions: [PowResetPassword, PowEmailConfirmation]
+  alias MyApp.Products.Product
+
 
   schema "users" do
     pow_user_fields()
 
+    has_many :products, Product
+
     timestamps()
+
   end
 
   def changeset(user_or_changeset, attrs) do

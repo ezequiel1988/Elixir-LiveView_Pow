@@ -1,0 +1,60 @@
+<section class="hero">
+  <h3 style="margin-top: 15px; margin-bottom: 15px;">Hola <%= @user.email %> estos son sus productos...</h3>
+</section>
+
+<div>
+  <form phx-change="product">
+    <label for="exampleSelect1">Buscar por producto</label>
+    <select class="form-control" name="product">
+    <%= options_for_select(@list_product, "product") %>
+    </select>
+  </form>
+</div>
+
+
+<%= if !@loading do %>
+<div class="d-flex justify-content-center">
+
+  <div class="spinner-grow text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow text-secondary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow text-success" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+
+</div>
+<% end %>
+
+<div style="display: flex; justify-content: flex-end; margin: 15px 50px 15px 0px;">
+  <%= link "Agregar producto", to: Routes.live_path(@socket, MyAppWeb.AddProductsLive) %>
+</div>
+
+<div class="row">
+  <%= for product <- @products do %>
+    <div class="col-sm-4">
+      <div class="card" style="max-width: 30rem; margin-top: 3rem;">
+        <img src="<%= product.image %>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= product.name %></h5>
+          <div class="card-text">
+            <ul>
+              <li>
+                Precio: $<%= product.price %>
+              </li>
+              <li>
+                Stock: <%= product.stock %>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div style="justify-content: space-between; display: flex;" class="card-body">
+          <%= link "Actualizar producto", to: Routes.live_path(@socket, MyAppWeb.UpdateProductsLive, product_id: product.id), class: "btn btn-success" %>
+          <%= link "Eliminar producto", to: Routes.live_path(@socket, MyAppWeb.AddProductsLive), class: "btn btn-danger" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

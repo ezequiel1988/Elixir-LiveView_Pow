@@ -1,4 +1,8 @@
-<section class="phx-hero">
-  <h1>Bienvenido al sistema de gestión</h1>
-  <p>Sitio en construcción...</p>
+<section style="margin-top: 15px;" class="jumbotron">
+  <%= if !@user do %>
+    <h1 style="text-align: center">Bienvenido al sistema de gestión</h1>
+  <% else %>
+    <h1 style="text-align: center">Bienvenido al sistema de gestión <%= @user.email %></h1>
+  <% end %>
+  <p style="text-align: center">Sitio en construcción...</p>
 </section>

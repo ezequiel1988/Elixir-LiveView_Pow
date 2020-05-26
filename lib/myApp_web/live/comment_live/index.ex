@@ -16,19 +16,19 @@ defmodule MyAppWeb.CommentLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Comment")
+    |> assign(:page_title, "Editar Comentario")
     |> assign(:comment, Comments.get_comment!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Comment")
+    |> assign(:page_title, "Nuevo Comentario")
     |> assign(:comment, %Comment{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Comments")
+    |> assign(:page_title, "Listado de Comentarios")
     |> assign(:comment, nil)
   end
 

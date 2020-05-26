@@ -15,14 +15,23 @@ defmodule MyAppWeb.ProductsLive do
   @impl true
   def handle_event("product", %{"product" => product_name}, socket) do
 
-  send(self(), {:productName_not_found, product_name})
+    send(self(), {:productName_not_found, product_name})
 
-  products = Products.list_products_by_criteria(type: product_name)
+    products = Products.list_products_by_criteria(type: product_name)
 
-  socket = assign(socket, products: products, loading: true, type: product_name)
+    socket = assign(socket, products: products, loading: true, type: product_name)
 
-  {:noreply, socket}
+    {:noreply, socket}
 
+  end
+
+  def handle_event("delete", %{"value" => product_id}, socket) do
+
+    product = Products.get_product!(product_id)
+
+    {:ok, _} = Products.delete_product(product)
+
+    {:noreply, assign(socket, :products, Products.list_products())}
   end
 
 

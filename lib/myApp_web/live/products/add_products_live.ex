@@ -3,8 +3,6 @@ defmodule MyAppWeb.AddProductsLive do
   alias MyApp.Products
   alias MyApp.Products.Product
   alias MyApp.Repo
-  import Ecto
-
 
   @impl true
   def mount(_params, %{"current_user"=> user}, socket) do

@@ -25,6 +25,10 @@ defmodule MyAppWeb.Router do
      error_handler: Pow.Phoenix.PlugErrorHandler
   end
 
+  pipeline :admin do
+    plug MyAppWeb.Plugs.EnsureRolePlug, :admin
+  end
+
   scope "/" do
     pipe_through :browser
 
@@ -40,7 +44,7 @@ defmodule MyAppWeb.Router do
   end
 
   scope "/", MyAppWeb do
-      pipe_through [:browser, :protected]
+      pipe_through [:browser, :protected, :admin]
 
       live "/products", ProductsLive
       live "/products/new", AddProductsLive

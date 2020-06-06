@@ -5,4 +5,12 @@
     <h1 style="text-align: center">Bienvenido al sistema de gestión <%= @user.email %></h1>
   <% end %>
   <p style="text-align: center">Sitio en construcción...</p>
+      <%= IO.inspect MyApp.Users.is_admin?(@user) %>
+
+  <%= if MyApp.Users.is_admin?(@user) do %>
+  <div>
+    <p>You have admin access</p>
+    <%= IO.inspect MyApp.Users.is_admin?(@user) %>
+  </div>
+<% end %>
 </section>

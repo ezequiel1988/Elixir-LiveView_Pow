@@ -2,6 +2,12 @@
   <h3 style="margin-top: 15px; margin-bottom: 15px;">Hola <%= @user.email %> estos son sus productos...</h3>
 </section>
 
+<%= if MyApp.Users.is_admin?(@current_user) do %>
+  <div>
+    <p>You have admin access</p>
+  </div>
+<% end %>
+
 <div>
   <form phx-change="product">
     <label for="exampleSelect1">Buscar por producto</label>
